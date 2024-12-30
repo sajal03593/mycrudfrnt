@@ -185,13 +185,8 @@ const PayList = () => {
                                         </div>
                                         <div className="col-md-8">
                                             <label htmlFor="userRole" className="form-label">Month</label>
-                                            <select onChange={(e) => {setPayMonth(e.target.value)}} className="form-select" id="userRole">
+                                            <select value={payMonth} onChange={(e) => {setPayMonth(e.target.value)}} className="form-select" id="userRole">
                                                 <option selected="">Select Month</option>
-                                                {
-                                                    monthNames.map((item, i) => (
-                                                        <option key={i}>{item}</option>
-                                                    ))
-                                                }
                                             </select>
                                         </div>
                                         <div className=" col-md-8">
