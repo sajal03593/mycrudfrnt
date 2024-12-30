@@ -29,7 +29,7 @@ const UserAdd = () => {
 
       //  headers:{'Content-Type':'multipart/form-data'}
 
-        axios.post('https://myrent-bcknd-9adzs6yk3-shihab-uddins-projects-788c87a9.vercel.app/userAdd', formData).then((response) => {
+        axios.post('https://myrent-bcknd-9adzs6yk3-shihab-uddins-projects-788c87a9.vercel.app/UserAdd', formData).then((response) => {
             console.log(response);
             toast.success('User Added successfully');
         }).catch(error => {
