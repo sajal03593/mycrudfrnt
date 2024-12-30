@@ -104,6 +104,15 @@ const PayList = () => {
     }
 
 
+    const fltTxt=['FLT-1(B-1(PURBHA))','FLT-1(B-1(POSCIM))',
+        'FLT-3(B-1(PURBHA))','FLT-3(B-1(POSCIM))','FLT-4(B-1)',
+        'FLT-1(B-2)', 'FLT-2(B-2)', 'FLT-3(B-2)', 'FLT-4(B-2)',
+        'FLT-5B-2)', 'RH-1','RH-2','RH-3','RH-4','RH-5']
+
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ]
 
 
     return (
@@ -176,7 +185,7 @@ const PayList = () => {
                                 </div>
                                 <div className="modal-body">
                                     <form className=" row-gap-3 mt-3 m-5">
-                                        <div className="col-md-3 mb-3">
+                                        <div className="col-md-6 mb-3">
                                             <label htmlFor="userName" className="form-label">Date</label>
                                             <input value={payDate} onChange={(e) => {
                                                 setPayDate(e.target.value)
@@ -186,7 +195,11 @@ const PayList = () => {
                                         <div className="col-md-8">
                                             <label htmlFor="userRole" className="form-label">Month</label>
                                             <select value={payMonth} onChange={(e) => {setPayMonth(e.target.value)}} className="form-select" id="userRole">
-                                                <option selected=""></option>
+                                                {
+                                                    fltTxt.map((item, i) => (
+                                                        <option key={i}>{item}</option>
+                                                    ))
+                                                }
                                             </select>
                                         </div>
                                         <div className=" col-md-8">
@@ -240,7 +253,11 @@ const PayList = () => {
                                             <select value={payStatus} onChange={(e) => {
                                                 setPayStatus(e.target.value)
                                             }} className="form-select" id="userRole">
-                                                <option selected=""></option>
+                                                {
+                                                    monthNames.map((item, i) => (
+                                                        <option key={i}>{item}</option>
+                                                    ))
+                                                }
                                             </select>
                                         </div>
                                         <div className="col-md-5 mt-3">
