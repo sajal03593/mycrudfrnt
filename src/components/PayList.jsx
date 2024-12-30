@@ -45,7 +45,7 @@ const PayList = () => {
         formData.append('payStatus', payStatus);
         formData.append('payMonth', payMonth);
 
-        axios.put('http://localhost:3000/UserpayGet/'+Id, formData).then((res) => {
+        axios.put('https://myrent-bcknd-9adzs6yk3-shihab-uddins-projects-788c87a9.vercel.app/UserpayGet/'+Id, formData).then((res) => {
             console.log(res);
             axios.get('http://localhost:3000/UserpayGet').then((res) => {
                 console.log(res);
@@ -62,8 +62,8 @@ const PayList = () => {
     }
 
     const onHndleDelete=(item)=>{
-        axios.delete(`http://localhost:3000/UserpayGet/${item._id}`).then((res) => {
-            axios.get('http://localhost:3000/UserpayGet').then((res) => {
+        axios.delete(`https://myrent-bcknd-9adzs6yk3-shihab-uddins-projects-788c87a9.vercel.app/UserpayGet/${item._id}`).then((res) => {
+            axios.get('https://myrent-bcknd-9adzs6yk3-shihab-uddins-projects-788c87a9.vercel.app/UserpayGet').then((res) => {
                 setData(res.data)
                 toast.success('User Deleted successfully');
             })
@@ -77,7 +77,7 @@ const PayList = () => {
 
     useEffect(() => {
         async function fetchData() {
-            let data = await axios.get('http://localhost:3000/UserpayGet')
+            let data = await axios.get('https://myrent-bcknd-9adzs6yk3-shihab-uddins-projects-788c87a9.vercel.app/UserpayGet')
             console.log(data.data);
             setData(data.data);
         }

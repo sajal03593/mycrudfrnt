@@ -46,7 +46,7 @@ const Users = () => {
         formData.append('AdvanceDate', AdvanceDate);
         formData.append('UserStatus', UserStatus);
 
-        axios.put('http://localhost:3000/UserGet/'+Id, formData).then((res) => {
+        axios.put('https://myrent-bcknd-9adzs6yk3-shihab-uddins-projects-788c87a9.vercel.app/UserGet/'+Id, formData).then((res) => {
             console.log(res);
             axios.get('http://localhost:3000/UserGet').then((res) => {
                 console.log(res);
@@ -63,8 +63,8 @@ const Users = () => {
     }
 
     const onHndleDelete=(item)=>{
-        axios.delete(`http://localhost:3000/UserGet/${item._id}`).then((res) => {
-            axios.get('http://localhost:3000/UserGet').then((res) => {
+        axios.delete(`https://myrent-bcknd-9adzs6yk3-shihab-uddins-projects-788c87a9.vercel.app/${item._id}`).then((res) => {
+            axios.get('https://myrent-bcknd-9adzs6yk3-shihab-uddins-projects-788c87a9.vercel.app/UserGet').then((res) => {
                 setData(res.data)
                 toast.success('User Deleted successfully');
             })
@@ -78,7 +78,7 @@ const Users = () => {
 
     useEffect(() => {
         async function fetchData() {
-            let data = await axios.get('http://localhost:3000/UserGet')
+            let data = await axios.get('https://myrent-bcknd-9adzs6yk3-shihab-uddins-projects-788c87a9.vercel.app/UserGet')
             console.log(data.data);
             setData(data.data);
         }

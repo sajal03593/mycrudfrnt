@@ -30,7 +30,7 @@ const Users = () => {
 
         //  headers:{'Content-Type':'multipart/form-data'}
 
-        axios.post('http://localhost:3000/UserpayAdd', formData).then((response) => {
+        axios.post('https://myrent-bcknd-9adzs6yk3-shihab-uddins-projects-788c87a9.vercel.app/UserpayAdd', formData).then((response) => {
             console.log(response);
             toast.success('User Added successfully');
         }).catch(error => {
