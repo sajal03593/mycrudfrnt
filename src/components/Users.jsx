@@ -135,7 +135,7 @@ const Users = () => {
                                     <td>{item.mbl}</td>
                                     <td>{item.addRs}</td>
                                     <td>{item.oCpsn}</td>
-                                    <td>{item.AdvanceDate}</td>
+                                    <td>{item.AdvanceDate.getMonth()}</td>
                                     <td>
                                         <button type="button" onClick={()=>{onOpenModal(item)}} data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn-sm btn-warning mx-2">Edit</button>
                                         <button onClick={()=>{onHndleUserDelete(item)}} className="btn btn-sm btn-danger mx-2">Delete</button>
