@@ -44,6 +44,11 @@ const Users = () => {
         'FLT-1(B-2)', 'FLT-2(B-2)', 'FLT-3(B-2)', 'FLT-4(B-2)',
         'FLT-5B-2)', 'RH-1','RH-2','RH-3','RH-4','RH-5']
 
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ]
+
 
     return (
         <>
@@ -56,11 +61,16 @@ const Users = () => {
                             setPayDate(e.target.value)
                         }} type="date" className="form-control" id="userName" placeholder="Enter name"/>
                     </div>
-                    <div className="col-md-5">
-                        <label htmlFor="userName" className="form-label">Month</label>
-                        <input onChange={(e) => {
-                            setPayMonth(e.target.value)
-                        }} type="date" className="form-control" id="userName" placeholder="Enter name"/>
+                    <div className="col-md-8">
+                        <label htmlFor="userRole" className="form-label">Month</label>
+                        <select onChange={(e) => {setPayMonth(e.target.value)}} className="form-select" id="userRole">
+                            <option selected="">Select Month</option>
+                            {
+                                monthNames.map((item, i) => (
+                                    <option key={i}>{item}</option>
+                                ))
+                            }
+                        </select>
                     </div>
                     <div className="col-md-8">
                         <label htmlFor="userRole" className="form-label">Flat</label>
@@ -69,7 +79,7 @@ const Users = () => {
                         }} className="form-select" id="userRole">
                             <option selected="">Select role</option>
                             {
-                                fltTxt.map((item,i)=> (
+                                fltTxt.map((item, i) => (
                                     <option key={i}>{item}</option>
                                 ))
                             }

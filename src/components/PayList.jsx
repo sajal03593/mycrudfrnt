@@ -145,7 +145,7 @@ const PayList = () => {
                                     <td>{item.dueRnt}</td>
                                     <td>{item.payStatus}</td>
                                     <td>{item.payDate}</td>
-                                    <td>{item.payMonth.toLocaleString('default', { month: 'short' })}</td>
+                                    <td>{item.payMonth}</td>
                                     <td>
                                         <button type="button" onClick={() => {
                                             onOpenModal(item)
