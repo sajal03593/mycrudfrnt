@@ -80,7 +80,7 @@ const Users = () => {
         async function fetchData() {
             let data = await axios.get('https://mycrud-bcknd.vercel.app/UserGet')
             console.log(data.data);
-            setUsrData(data.data);
+            setData(data.data);
         }
         fetchData();
     },[])
