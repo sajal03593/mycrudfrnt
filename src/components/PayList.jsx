@@ -186,7 +186,7 @@ const PayList = () => {
                                         <div className="col-md-8">
                                             <label htmlFor="userRole" className="form-label">Month</label>
                                             <select value={payMonth} onChange={(e) => {setPayMonth(e.target.value)}} className="form-select" id="userRole">
-                                                <option selected="">Select Month</option>
+                                                <option selected=""></option>
                                             </select>
                                         </div>
                                         <div className=" col-md-8">
@@ -240,10 +240,7 @@ const PayList = () => {
                                             <select value={payStatus} onChange={(e) => {
                                                 setPayStatus(e.target.value)
                                             }} className="form-select" id="userRole">
-                                                <option selected="">Select role</option>
-                                                <option>Complete</option>
-                                                <option>Pending</option>
-                                                <option>Due</option>
+                                                <option selected=""></option>
                                             </select>
                                         </div>
                                         <div className="col-md-5 mt-3">
