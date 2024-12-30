@@ -176,19 +176,23 @@ const PayList = () => {
                                 </div>
                                 <div className="modal-body">
                                     <form className=" row-gap-3 mt-3 m-5">
-                                        <div className="input-group col-md-3 mb-3">
+                                        <div className="col-md-3 mb-3">
                                             <label htmlFor="userName" className="form-label">Date</label>
                                             <input value={payDate} onChange={(e) => {
                                                 setPayDate(e.target.value)
                                             }} type="date" className="form-control" id="userName"
                                                    placeholder="Enter name"/>
                                         </div>
-                                        <div className="col-md-5">
-                                            <label htmlFor="userName" className="form-label">Month</label>
-                                            <input onChange={(e) => {
-                                                setPayMonth(e.target.value)
-                                            }} type="moth" className="form-control" id="userName"
-                                                   placeholder="Enter name"/>
+                                        <div className="col-md-8">
+                                            <label htmlFor="userRole" className="form-label">Month</label>
+                                            <select onChange={(e) => {setPayMonth(e.target.value)}} className="form-select" id="userRole">
+                                                <option selected="">Select Month</option>
+                                                {
+                                                    monthNames.map((item, i) => (
+                                                        <option key={i}>{item}</option>
+                                                    ))
+                                                }
+                                            </select>
                                         </div>
                                         <div className=" col-md-8">
                                             <label htmlFor="userRole" className="form-label">Flat</label>
