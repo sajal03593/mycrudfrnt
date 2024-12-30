@@ -50,7 +50,7 @@ const Users = () => {
             console.log(res);
             axios.get('https://mycrud-bcknd.vercel.app/UserGet').then((res) => {
                 console.log(res);
-                setusrData(res.data);
+                setData(res.data);
                 setShowModal(false);
                 toast.success('User Updated successfully');
             })
