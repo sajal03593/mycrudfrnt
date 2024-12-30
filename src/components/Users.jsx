@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 
 const Users = () => {
-    const [getData, setUsrData] = useState([]);
+    const [getData, setData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -50,7 +50,7 @@ const Users = () => {
             console.log(res);
             axios.get('https://mycrud-bcknd.vercel.app/UserGet').then((res) => {
                 console.log(res);
-                setUsrData(res.data);
+                setData(res.data);
                 setShowModal(false);
                 toast.success('User Updated successfully');
             })
@@ -65,7 +65,7 @@ const Users = () => {
     const onHndleUserDelete=(item)=>{
         axios.delete(`https://mycrud-bcknd.vercel.app/UserGet/${item._id}`).then((res) => {
             axios.get('https://mycrud-bcknd.vercel.app/UserGet').then((res) => {
-                setUsrData(res.data)
+                setData(res.data)
                 toast.success('User Deleted successfully');
             })
         }).catch(err=>{
