@@ -1,0 +1,46 @@
+body {
+  background-color: #f8f9fa;
+}
+.sidebar {
+  min-height: 100vh;
+  background-color: #343a40;
+  color: white;
+}
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px 15px;
+}
+.sidebar a:hover {
+  background-color: #495057;
+}
+.content {
+  background-color: #a4f9fb;
+  padding: 20px;
+}
+
+ /*for serch*/
+
+   table {
+     width: 100%;
+     border-collapse: collapse;
+   }
+th, td {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+th {
+  background-color: #f4f4f4;
+}
+#searchInput {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/*.modal-backdrop {*/
+/*  background-color: transparent !important;*/
+/*}*/
