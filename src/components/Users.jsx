@@ -62,7 +62,7 @@ const Users = () => {
 
     }
 
-    const onHndleDelete=(item)=>{
+    const onHndleUserDelete=(item)=>{
         axios.delete(`https://mycrud-bcknd.vercel.app/${item._id}`).then((res) => {
             axios.get('https://mycrud-bcknd.vercel.app/UserGet').then((res) => {
                 setData(res.data)
@@ -138,7 +138,7 @@ const Users = () => {
                                     <td>{item.AdvanceDate}</td>
                                     <td>
                                         <button type="button" onClick={()=>{onOpenModal(item)}} data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn-sm btn-warning mx-2">Edit</button>
-                                        <button onClick={()=>{onHndleDelete(item)}} className="btn btn-sm btn-danger mx-2">Delete</button>
+                                        <button onClick={()=>{onHndleUserDelete(item)}} className="btn btn-sm btn-danger mx-2">Delete</button>
                                     </td>
                                 </tr>
                             ))

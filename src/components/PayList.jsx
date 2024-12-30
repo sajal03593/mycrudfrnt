@@ -63,12 +63,10 @@ const PayList = () => {
 
     const onHndleDelete=(item)=>{
         axios.delete(`https://mycrud-bcknd.vercel.app/UserpayGet/${item._id}`).then((res) => {
-            console.log(res)
-            toast.success('User deleted successfully');
-            // axios.get('https://mycrud-bcknd.vercel.app/UserpayGet').then((res) => {
-            //     setData(res.data)
-            //     toast.success('User Deleted successfully');
-            // })
+            axios.get('https://mycrud-bcknd.vercel.app/UserpayGet').then((res) => {
+                setData(res.data)
+                toast.success('User Deleted successfully');
+            })
         }).catch(err=>{
             console.log(err)
             toast.error("failed delete created");
