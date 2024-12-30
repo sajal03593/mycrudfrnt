@@ -196,7 +196,7 @@ const PayList = () => {
                                             <label htmlFor="userRole" className="form-label">Month</label>
                                             <select value={payMonth} onChange={(e) => {setPayMonth(e.target.value)}} className="form-select" id="userRole">
                                                 {
-                                                    fltTxt.map((item, i) => (
+                                                    monthNames.map((item, i) => (
                                                         <option key={i}>{item}</option>
                                                     ))
                                                 }
@@ -207,10 +207,12 @@ const PayList = () => {
                                             <select value={flt} onChange={(e) => {
                                                 setFlt(e.target.value)
                                             }} className="form-select" id="userRole">
-                                                <option selected="">Select role</option>
-                                                <option>Complete</option>
-                                                <option>Pending</option>
-                                                <option>Due</option>
+                                                {
+                                                    fltTxt.map((item, i) => (
+                                                        <option key={i} selected="">Select role</option>
+                                                         <option key={i}>{item}</option>
+                                                    ))
+                                                }
                                             </select>
                                         </div>
                                         <div className="col-md-8">
@@ -253,11 +255,10 @@ const PayList = () => {
                                             <select value={payStatus} onChange={(e) => {
                                                 setPayStatus(e.target.value)
                                             }} className="form-select" id="userRole">
-                                                {
-                                                    monthNames.map((item, i) => (
-                                                        <option key={i}>{item}</option>
-                                                    ))
-                                                }
+                                                <option selected="">Select Status</option>
+                                                <option selected="">Complete</option>
+                                                <option selected="">Pending</option>
+                                                <option selected="">Due</option>
                                             </select>
                                         </div>
                                         <div className="col-md-5 mt-3">
