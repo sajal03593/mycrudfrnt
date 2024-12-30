@@ -209,7 +209,7 @@ const PayList = () => {
                                             }} className="form-select" id="userRole">
                                                 {
                                                     fltTxt.map((item, i) => (
-                                                        <option key={i} selected="">Select role</option>
+                                                        <option key={i}>Select role</option>
                                                          <option key={i}>{item}</option>
                                                     ))
                                                 }
