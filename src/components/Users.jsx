@@ -63,7 +63,7 @@ const Users = () => {
     }
 
     const onHndleUserDelete=(item)=>{
-        axios.delete(`https://mycrud-bcknd.vercel.app/${item._id}`).then((res) => {
+        axios.delete(`https://mycrud-bcknd.vercel.app/UserGet/${item._id}`).then((res) => {
             axios.get('https://mycrud-bcknd.vercel.app/UserGet').then((res) => {
                 setusrData(res.data)
                 toast.success('User Deleted successfully');
