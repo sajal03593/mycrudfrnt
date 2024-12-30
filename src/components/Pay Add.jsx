@@ -60,7 +60,7 @@ const Users = () => {
                         <label htmlFor="userName" className="form-label">Month</label>
                         <input onChange={(e) => {
                             setPayMonth(e.target.value)
-                        }} type="month" className="form-control" id="userName" placeholder="Enter name"/>
+                        }} type="date" className="form-control" id="userName" placeholder="Enter name"/>
                     </div>
                     <div className="col-md-8">
                         <label htmlFor="userRole" className="form-label">Flat</label>
