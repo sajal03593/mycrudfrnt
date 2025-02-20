@@ -13,6 +13,7 @@ const UserAdd = () => {
     const [Advance, setAdvance] = useState('');
     const [AdvanceDate, setAdvanceDate] = useState('');
     const [UserStatus, setUserStatus] = useState('');
+    const [usrflt, setUsrflt] = useState('');
 
     const onHandlrSubmit = async (event) => {
         event.preventDefault();
@@ -26,6 +27,7 @@ const UserAdd = () => {
         formData.append('Advance', Advance);
         formData.append('AdvanceDate', AdvanceDate);
         formData.append('UserStatus', UserStatus);
+        formData.append('usrflt', usrflt);
 
       //  headers:{'Content-Type':'multipart/form-data'}
 
@@ -37,15 +39,34 @@ const UserAdd = () => {
             toast.error('Something went wrong!');
         })
 
-
-
     }
+    //for flt
+
+    const fltTxt=['FLT-1(B-1(PURBHA))','FLT-1(B-1(POSCIM))',
+        'FLT-3(B-1(PURBHA))','FLT-3(B-1(POSCIM))','FLT-4(B-1)',
+        'FLT-1(B-2)', 'FLT-2(B-2)', 'FLT-3(B-2)', 'FLT-4(B-2)',
+        'FLT-5B-2)', 'RH-1','RH-2','RH-3','RH-4','RH-5']
+
+
 
 
     return (
         <>
         <form>
             <h1 className="fs-1 text-primary d-flex justify-content-center mt-3">User Add</h1>
+            <div className="col-md-8">
+                <label htmlFor="userRole" className="form-label">Flat</label>
+                <select onChange={(e) => {
+                    setUsrflt(e.target.value)
+                }} className="form-select" id="userRole">
+                    <option selected="">Select Option</option>
+                    {
+                        fltTxt.map((item, i) => (
+                            <option key={i}>{item}</option>
+                        ))
+                    }
+                </select>
+            </div>
             <div className="row g-3">
                 <div className="col-md-6">
                     <label htmlFor="inputEmail4" className="form-label">First Name</label>

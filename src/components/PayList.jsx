@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 const PayList = () => {
     const [getData, setData] = useState([]);
@@ -63,6 +65,7 @@ const PayList = () => {
 
     const onHndleDelete=(item)=>{
         axios.delete(`https://mycrud-bcknd.vercel.app/UserpayGet/${item._id}`).then((res) => {
+           console.log(res)
             axios.get('https://mycrud-bcknd.vercel.app/UserpayGet').then((res) => {
                 setData(res.data)
                 toast.success('User Deleted successfully');
@@ -114,11 +117,34 @@ const PayList = () => {
         "July", "August", "September", "October", "November", "December"
     ]
 
+    const handlePrint = () => {
+        const doc = new jsPDF();
+        doc.text("Users Pay List", 14, 10);
+        doc.autoTable({
+            head: [["#", "Flat No", "Full Name", "Mobile", "Actual Rent", "Get Rent", "Due Rent", "Rent Status", "Date", "Month"]],
+            body: getData.map((item, i) => [
+                i + 1,
+                item.flt,
+                item.fullName,
+                item.mobile,
+                item.actualRnt,
+                item.getRnt,
+                item.dueRnt,
+                item.payStatus,
+                item.payDate,
+                item.payMonth,
+            ]),
+        });
+        doc.save("PayList.pdf");
+    };
 
     return (
         <>
             <section id="addUserSection">
                 <h2>Users Pay List</h2>
+                <div className="d-flex justify-content-end m-2">
+                    <button onClick={handlePrint} className="btn btn-success">Print</button>
+                </div>
                 <div className=" col-md-4 mb-3">
                     <input onKeyUp={onhndleSrch} type="text" id="searchInput" className="form-control"
                            placeholder="search by mobile" aria-label="Recipient's username"

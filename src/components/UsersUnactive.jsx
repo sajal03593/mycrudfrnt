@@ -1,8 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import jsPDF from "jspdf";
-import 'jspdf-autotable'
 
 
 const Users = () => {
@@ -66,7 +64,7 @@ const Users = () => {
 
     const onHndleUserDelete=(item)=>{
         axios.delete(`https://mycrud-bcknd.vercel.app/UserGet/${item._id}`).then((res) => {
-           console.log(res)
+            console.log(res)
             axios.get('https://mycrud-bcknd.vercel.app/UserGet').then((res) => {
                 setData(res.data)
                 toast.success('User Deleted successfully');
@@ -77,13 +75,30 @@ const Users = () => {
         })
 
     }
+   const [fndData, setFndData] = useState([])
+   //const [UsrStatus, setUsrStatus] = useState('')
+    const onhndleUnactive = ()=>{
+       // console.log(UsrStatus);
+        let fndData = getData.filter(items=>items.UserStatus === 'Unactive');
+        console.log(fndData);
+        setFndData(fndData);
+    }
 
+    // useEffect(() => {
+    //     function getsData() {
+    //        let fnDdata = getData.filter(items=>items.UserStatus === 'Unactive');
+    //        setFndData(fnDdata);
+    //        console.log(fnDdata);
+    //    }
+    //    getsData();
+    // },[])
 
     useEffect(() => {
         async function fetchData() {
             let data = await axios.get('https://mycrud-bcknd.vercel.app/UserGet')
             console.log(data.data);
             setData(data.data);
+            //setUsrStatus(data.data.UserStatus)
         }
         fetchData();
     },[])
@@ -107,30 +122,12 @@ const Users = () => {
         }
     }
 
-    const handlePrint = () => {
-        const doc = new jsPDF();
-        doc.text("Users List", 14, 10);
-        doc.autoTable({
-            head: [["#", "Name", "Mobile", "Address", "Occopation", "Advance Taka", "Date"]],
-            body: getData.map((item, i) => [
-                i + 1,
-                item.firstName,
-                item.mbl,
-                item.addRs,
-                item.oCpsn,
-                item.Advance,
-                item.AdvanceDate
-            ]),
-        });
-        doc.save("Users.pdf");
-    };
-
     return (
         <>
             <section id="addUserSection">
                 <h2>Add Users</h2>
                 <div className="d-flex justify-content-end">
-                    <button onClick={handlePrint} className="btn btn-success">Print</button>
+                    <button onClick={onhndleUnactive} className="btn btn-success">Unactive</button>
                 </div>
                 <div className=" col-md-4 mb-3">
                     <input onKeyUp={onhndleSrch} type="text" id="searchInput" className="form-control"
@@ -146,19 +143,21 @@ const Users = () => {
                             <th>Mobile</th>
                             <th>Address</th>
                             <th>Occopation</th>
+                            <th>Unactive/Active</th>
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         {
-                            getData.map((item, i) => (
+                            fndData.map((item, i) => (
                                 <tr key={i.toString()}>
                                     <td>{i + 1}</td>
                                     <td>{item.firstName}</td>
                                     <td>{item.mbl}</td>
                                     <td>{item.addRs}</td>
                                     <td>{item.oCpsn}</td>
+                                    <td>{item.UserStatus}</td>
                                     <td>{item.AdvanceDate}</td>
                                     <td>
                                         <button type="button" onClick={()=>{onOpenModal(item)}} data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn-sm btn-warning mx-2">Edit</button>
