@@ -8,9 +8,9 @@ const Users = () => {
     const [fullName, setFullName] = useState("");
     const [mobile, setMobile] = useState("");
     const [flt, setFlt] = useState("");
-    const [actualRnt, setActualRnt] = useState("");
-    const [getRnt, setGetRnt] = useState("");
-    const [dueRnt, setDueRnt] = useState("");
+    const [actualRnt, setActualRnt] = useState(0);
+    const [getRnt, setGetRnt] = useState(0);
+    const [dueRnt, setDueRnt] = useState(0);
     const [payDate, setPayDate] = useState("");
     const [payStatus, setPayStatus] = useState("");
     const [payMonth, setPayMonth] = useState("");
@@ -45,6 +45,13 @@ const Users = () => {
       //  }
 
     }
+
+    const onhndlenumSum=()=>{
+        let sum1=parseFloat(actualRnt)
+        let sum2=parseFloat(getRnt)
+        setDueRnt(sum1-sum2)
+    }
+
 
   //  const [getPayData, setGetPayData] = useState([]);
   //  const [PayFlt, setPatFlt] = useState("");
@@ -172,20 +179,18 @@ const Users = () => {
                     </div>
                     <div className="col-md-3">
                         <label htmlFor="userEmail" className="form-label">Actual Rent</label>
-                        <input value={shwData? shwData?.Advance : ''}  onChange={(e) => {
+                        <input onKeyUp={onhndlenumSum} value={shwData? shwData?.Advance : ''}  onChange={(e) => {
                             setActualRnt(e.target.value)}} type="text" className="form-control" id="userEmail" placeholder="Enter rent"/>
                     </div>
                     <div className="col-md-3">
                         <label htmlFor="userEmail" className="form-label">Get Rent</label>
-                        <input onChange={(e) => {
+                        <input onKeyUp={onhndlenumSum} onChange={(e) => {
                             setGetRnt(e.target.value)
                         }} type="text" className="form-control" id="userEmail" placeholder="Enter get rent"/>
                     </div>
                     <div className="col-md-3">
                         <label htmlFor="userEmail" className="form-label">Due Rent</label>
-                        <input onChange={(e) => {
-                            setDueRnt(e.target.value)
-                        }} type="text" className="form-control" id="userEmail" placeholder="Enter due rent"/>
+                        <input onBeforeInput={onhndlenumSum} value={dueRnt} type="text" className="form-control" id="userEmail" placeholder="Enter due rent"/>
                     </div>
                     <div className="col-md-3">
                         <label htmlFor="userRole" className="form-label">Status</label>
