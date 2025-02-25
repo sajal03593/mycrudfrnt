@@ -55,6 +55,8 @@ const Users = () => {
                 setData(res.data);
                 setShowModal(false);
                 toast.success('User Updated successfully');
+                setData(res.data.filter(users=>users.UserStatus==='Active'));
+
             })
         }).catch(error => {
             console.log(error);
@@ -83,7 +85,7 @@ const Users = () => {
         async function fetchData() {
             let data = await axios.get('https://mycrud-bcknd.vercel.app/UserGet')
             console.log(data.data);
-            setData(data.data);
+            setData(data.data.filter(users=>users.UserStatus==='Active'));
         }
         fetchData();
     },[])

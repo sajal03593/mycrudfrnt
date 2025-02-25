@@ -53,6 +53,7 @@ const Users = () => {
                 setData(res.data);
                 setShowModal(false);
                 toast.success('User Updated successfully');
+                setFndData( res.data.filter(items=>items.UserStatus === 'Unactive'));
             })
         }).catch(error => {
             console.log(error);
@@ -77,12 +78,12 @@ const Users = () => {
     }
    const [fndData, setFndData] = useState([])
    //const [UsrStatus, setUsrStatus] = useState('')
-    const onhndleUnactive = ()=>{
-       // console.log(UsrStatus);
-        let fndData = getData.filter(items=>items.UserStatus === 'Unactive');
-        console.log(fndData);
-        setFndData(fndData);
-    }
+   //  const onhndleUnactive = ()=>{
+   //     // console.log(UsrStatus);
+   //      let fndData = getData.filter(items=>items.UserStatus === 'Unactive');
+   //      console.log(fndData);
+   //      setFndData(fndData);
+   //  }
 
     // useEffect(() => {
     //     function getsData() {
@@ -97,8 +98,12 @@ const Users = () => {
         async function fetchData() {
             let data = await axios.get('https://mycrud-bcknd.vercel.app/UserGet')
             console.log(data.data);
-            setData(data.data);
+            //setData(data.data);
             //setUsrStatus(data.data.UserStatus)
+            //==============
+            setFndData( data.data.filter(items=>items.UserStatus === 'Unactive'));
+          //  console.log(fndData);
+          //  setFndData(fndData);
         }
         fetchData();
     },[])
@@ -127,7 +132,7 @@ const Users = () => {
             <section id="addUserSection">
                 <h2>Add Users</h2>
                 <div className="d-flex justify-content-end">
-                    <button onClick={onhndleUnactive} className="btn btn-success">Unactive</button>
+                    {/*<button onClick={onhndleUnactive} className="btn btn-success">Unactive</button>*/}
                 </div>
                 <div className=" col-md-4 mb-3">
                     <input onKeyUp={onhndleSrch} type="text" id="searchInput" className="form-control"

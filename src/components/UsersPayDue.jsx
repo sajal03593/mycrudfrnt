@@ -2,9 +2,9 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import jsPDF from "jspdf";
-import "jspdf-autotable";
 
-const PayList = () => {
+
+const UsersPayDue = () => {
     const [getData, setData] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [fullName, setFullName] = useState("");
@@ -54,7 +54,7 @@ const PayList = () => {
                 setData(res.data);
                 setShowModal(false);
                 toast.success('User Updated successfully');
-                setData(res.data.filter(users=>users.payStatus==='Complete'))
+                setFndData( res.data.filter(items=>items.payStatus === 'Due'));
             })
         }).catch(error => {
             console.log(error);
@@ -66,7 +66,7 @@ const PayList = () => {
 
     const onHndleDelete=(item)=>{
         axios.delete(`https://mycrud-bcknd.vercel.app/UserpayGet/${item._id}`).then((res) => {
-           console.log(res)
+            console.log(res)
             axios.get('https://mycrud-bcknd.vercel.app/UserpayGet').then((res) => {
                 setData(res.data)
                 toast.success('User Deleted successfully');
@@ -83,30 +83,10 @@ const PayList = () => {
         async function fetchData() {
             let data = await axios.get('https://mycrud-bcknd.vercel.app/UserpayGet')
             console.log(data.data);
-            setData(data.data.filter(users=>users.payStatus==='Complete'));
+            setData(data.data);
         }
         fetchData();
     },[])
-
-    const onhndleSrch=()=>{
-        let input = document.getElementById("searchInput");
-        let filter = input.value.toUpperCase();
-        let table = document.getElementById("dataTable");
-        let tr = table.getElementsByTagName("tr");
-
-        for (let i = 1; i < tr.length; i++) {
-            let td = tr[i].getElementsByTagName("td")[1]; // Search by Name column
-            if (td) {
-                let txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-
 
     const fltTxt=['FLT-1(B-1(PURBHA))','FLT-1(B-1(POSCIM))',
         'FLT-3(B-1(PURBHA))','FLT-3(B-1(POSCIM))','FLT-4(B-1)',
@@ -139,6 +119,38 @@ const PayList = () => {
         doc.save("PayList.pdf");
     };
 
+    //===================
+
+   const [fndData, setFndData] = useState([])
+
+    useEffect(() => {
+        async function fetchData() {
+            let data = await axios.get('https://mycrud-bcknd.vercel.app/UserpayGet')
+            console.log(data.data);
+            setFndData( data.data.filter(items=>items.payStatus === 'Due'));
+        }
+        fetchData();
+    },[])
+
+    const onhndleSrch=()=>{
+        let input = document.getElementById("searchInput");
+        let filter = input.value.toUpperCase();
+        let table = document.getElementById("dataTable");
+        let tr = table.getElementsByTagName("tr");
+
+        for (let i = 1; i < tr.length; i++) {
+            let td = tr[i].getElementsByTagName("td")[2]; // Search by Name column
+            if (td) {
+                let txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
     return (
         <>
             <section id="addUserSection">
@@ -170,7 +182,7 @@ const PayList = () => {
                         </thead>
                         <tbody>
                         {
-                            getData.map((item, i) => (
+                            fndData.map((item, i) => (
                                 <tr key={i.toString()}>
                                     <td>{i + 1}</td>
                                     <td>{item.flt}</td>
@@ -236,7 +248,7 @@ const PayList = () => {
                                             }} className="form-select" id="userRole">
                                                 {
                                                     fltTxt.map((item, i) => (
-                                                         <option key={i}>{item}</option>
+                                                        <option key={i}>{item}</option>
                                                     ))
                                                 }
                                             </select>
@@ -301,7 +313,8 @@ const PayList = () => {
                 )
             }
         </>
+
     );
 };
 
-export default PayList;
+export default UsersPayDue;

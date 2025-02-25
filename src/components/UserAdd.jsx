@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -30,14 +30,21 @@ const UserAdd = () => {
         formData.append('usrflt', usrflt);
 
       //  headers:{'Content-Type':'multipart/form-data'}
+        let findData = fndData.find(items=>items.UserStatus === 'Active');
+        console.log(findData);
+        //setFndData(findData);
 
-        axios.post('https://mycrud-bcknd.vercel.app/UserAdd', formData).then((response) => {
-            console.log(response);
-            toast.success('User Added successfully');
-        }).catch(error => {
-            console.log(error);
-            toast.error('Something went wrong!');
-        })
+        if(findData){
+            toast.error('this is already active');
+        }else{
+            axios.post('https://mycrud-bcknd.vercel.app/UserAdd', formData).then((response) => {
+                console.log(response);
+                toast.success('User Added successfully');
+            }).catch(error => {
+                console.log(error);
+                toast.error('Something went wrong!');
+            })
+        }
 
     }
     //for flt
@@ -46,6 +53,28 @@ const UserAdd = () => {
         'FLT-3(B-1(PURBHA))','FLT-3(B-1(POSCIM))','FLT-4(B-1)',
         'FLT-1(B-2)', 'FLT-2(B-2)', 'FLT-3(B-2)', 'FLT-4(B-2)',
         'FLT-5B-2)', 'RH-1','RH-2','RH-3','RH-4','RH-5']
+
+
+    //srch
+
+    const [fndData, setFndData] = useState([])
+    //const [UsrStatus, setUsrStatus] = useState('')
+    // const onhndleUnactive = ()=>{
+    //     // console.log(UsrStatus);
+    //     let fndData = getData.filter(items=>items.UserStatus === 'Unactive');
+    //     console.log(fndData);
+    //     setFndData(fndData);
+    // }
+
+    useEffect(() => {
+        async function fetchData() {
+            let data = await axios.get('https://mycrud-bcknd.vercel.app/UserGet')
+            console.log(data.data);
+            setFndData(data.data);
+            //setUsrStatus(data.data.UserStatus)
+        }
+        fetchData();
+    },[])
 
 
 
